@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tourism Competitiveness Analysis E-Portfolio for A'Famosa Water World, Melaka. Comprehensive analysis by Group 4 covering scores, analysis, and recommendations.">
+    <meta name="keywords" content="A'Famosa Water World, Melaka, Tourism Analysis, Competitiveness, E-Portfolio, Group 4">
+    <meta name="author" content="Group 4">
+    <meta property="og:title" content="A'Famosa Water World - E-Portfolio">
+    <meta property="og:description" content="Tourism Competitiveness Analysis E-Portfolio for A'Famosa Water World, Melaka">
+    <meta property="og:type" content="website">
     <title>A'Famosa water World - E-Portfolio</title>
     <link rel="icon" type="image/png" href="photos/wave.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -65,7 +70,6 @@
             scroll-behavior: smooth;
         }
         
-        /* Typography improvements */
         h1, h2, h3, h4, h5, h6 {
             letter-spacing: -0.02em;
             line-height: 1.2;
@@ -77,7 +81,6 @@
             letter-spacing: -0.01em;
         }
         
-        /* Improved spacing */
         section {
             padding-top: 6rem;
             padding-bottom: 6rem;
@@ -90,7 +93,6 @@
             }
         }
         
-        /* Floating orbs background */
         .orb {
             position: fixed;
             border-radius: 50%;
@@ -145,7 +147,6 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Micro-interactions for cards */
         .glass-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -157,8 +158,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
-        
-        /* Interactive elements with better touch targets */
         button, a, [role="button"] {
             min-height: 44px;
             min-width: 44px;
@@ -190,6 +189,10 @@
         .nav-link {
             position: relative;
             transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         
         .nav-link::after {
@@ -207,40 +210,6 @@
             width: 100%;
         }
         
-        .member-card {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-        
-        .member-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: inherit;
-        }
-        
-        .member-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3) !important;
-        }
-        
-        .member-card:hover::before {
-            opacity: 1;
-        }
-        
-        .member-card:active {
-            transform: translateY(-2px) scale(1);
-            transition: all 0.1s;
-        }
-        
         .gradient-text {
             background: linear-gradient(135deg, var(--accent-light), var(--accent-blue));
             -webkit-background-clip: text;
@@ -248,7 +217,6 @@
             background-clip: text;
         }
         
-        /* Enhanced buttons with micro-interactions */
         .btn-primary {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             border: none;
@@ -279,11 +247,6 @@
             box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5) !important;
         }
         
-        .btn-primary:active {
-            transform: translateY(-1px) scale(0.98);
-            transition: all 0.1s;
-        }
-        
         .btn-secondary {
             border: 2px solid rgba(255, 255, 255, 0.3);
             background: transparent;
@@ -295,12 +258,6 @@
             z-index: 1;
         }
         
-        .btn-secondary * {
-            position: relative;
-            z-index: 1;
-            color: inherit;
-        }
-        
         .btn-secondary:hover {
             border-color: rgba(255, 255, 255, 0.6);
             background: rgba(255, 255, 255, 0.1);
@@ -309,16 +266,23 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
         
-        .btn-secondary:hover * {
-            color: white;
+        .preview-card {
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .btn-secondary:active {
-            transform: translateY(0) scale(0.98);
-            transition: all 0.1s;
+        .preview-card:hover {
+            transform: translateY(-8px);
         }
         
-        /* Scroll animations */
+        .preview-card:hover .preview-icon {
+            transform: scale(1.1);
+        }
+        
+        .preview-icon {
+            transition: transform 0.3s ease;
+        }
+        
         .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
@@ -330,112 +294,6 @@
             transform: translateY(0);
         }
         
-        .fade-in {
-            opacity: 0;
-            transition: opacity 0.8s ease-out;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-        }
-        
-        /* Parallax effects */
-        .parallax-section {
-            transform: translateZ(0);
-            will-change: transform;
-        }
-        
-        /* Back to top button */
-        #back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
-        }
-        
-        @media (max-width: 768px) {
-            #back-to-top {
-                bottom: 15px;
-                right: 15px;
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
-        }
-        
-        #back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        #back-to-top:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.7) !important;
-            background: linear-gradient(135deg, var(--accent-light), var(--accent));
-        }
-        
-        #back-to-top:active {
-            transform: translateY(-2px) scale(1.05);
-            transition: all 0.1s;
-        }
-        
-        /* Progress bar */
-        #scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-light), var(--accent), var(--accent-blue));
-            background-size: 200% 100%;
-            animation: gradient-shift 3s ease infinite;
-            z-index: 9999;
-            transition: width 0.1s ease;
-            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.5) !important;
-        }
-        
-        @keyframes gradient-shift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-        
-        /* Enhanced table row interactions */
-        table tbody tr {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        table tbody tr:hover {
-            transform: translateX(4px);
-            background-color: rgba(255, 255, 255, 0.12) !important;
-        }
-        
-        /* Improved spacing for interactive elements */
-        .nav-link {
-            padding: 0.5rem 0.75rem;
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        /* Better mobile touch targets */
         @media (max-width: 768px) {
             .nav-link {
                 min-height: 48px;
@@ -448,14 +306,11 @@
                 font-size: 1rem;
             }
             
-            /* Ensure content doesn't overflow horizontally */
             .container {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
             
-            
-            /* Responsive text sizes */
             h1 {
                 font-size: 2.5rem !important;
                 line-height: 1.1 !important;
@@ -464,15 +319,8 @@
             h2 {
                 font-size: 2rem !important;
             }
-            
-            /* Chart container responsive */
-            .glass-card canvas {
-                max-width: 100%;
-                height: auto !important;
-            }
         }
         
-        /* Light mode specific styles */
         .dark-mode-text {
             color: var(--text-primary);
         }
@@ -502,7 +350,15 @@
         [data-theme="light"] .text-gray-300,
         [data-theme="light"] .text-gray-400,
         [data-theme="light"] .text-gray-500 {
-            color: var(--text-muted);
+            color: #475569;
+        }
+        
+        [data-theme="light"] .text-gray-400 {
+            color: #334155;
+        }
+        
+        [data-theme="light"] .text-gray-500 {
+            color: #1e293b;
         }
         
         [data-theme="light"] .text-white {
@@ -524,10 +380,6 @@
             opacity: 0.1;
         }
         
-        [data-theme="light"] table tbody tr:hover {
-            background-color: rgba(0, 0, 0, 0.05) !important;
-        }
-        
         [data-theme="light"] .nav-link {
             color: var(--text-secondary);
         }
@@ -536,15 +388,10 @@
             color: var(--text-primary);
         }
         
-        /* Light mode button styles */
         [data-theme="light"] .btn-secondary {
             border: 2px solid rgba(15, 23, 42, 0.3);
             color: var(--text-primary);
             background: transparent;
-        }
-        
-        [data-theme="light"] .btn-secondary * {
-            color: var(--text-primary);
         }
         
         [data-theme="light"] .btn-secondary:hover {
@@ -553,198 +400,170 @@
             color: var(--text-primary);
         }
         
-        [data-theme="light"] .btn-secondary:hover * {
-            color: var(--text-primary);
+        /* Active navigation state */
+        .nav-link.active {
+            color: white !important;
         }
         
-        /* Image Modal/Lightbox Styles */
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
+        [data-theme="light"] .nav-link.active {
+            color: var(--text-primary) !important;
+        }
+        
+        .nav-link.active::after {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
         
-        .image-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Skip to main content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 100;
+            border-radius: 4px;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Better focus indicators */
+        *:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        
+        /* Loading animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .loading {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* Smooth page transitions */
+        body {
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+        
+        body.loaded {
             opacity: 1;
         }
         
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-image {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: -50px;
-            right: 0;
-            color: white;
-            font-size: 40px;
-            font-weight: 300;
-            cursor: pointer;
-            transition: transform 0.3s ease, color 0.3s ease;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-        }
-        
-        .modal-close:hover {
-            transform: rotate(90deg);
-                    color: var(--accent-light);
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
-        .modal-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
             color: white;
-            font-size: 30px;
+            font-size: 20px;
             cursor: pointer;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 10001;
         }
         
-        .modal-nav:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-50%) scale(1.1);
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
         }
         
-        .modal-nav.prev {
-            left: 20px;
+        #back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
         }
         
-        .modal-nav.next {
-            right: 20px;
+        #back-to-top:active {
+            transform: translateY(-2px) scale(1.05);
+            transition: all 0.1s;
         }
         
-        .modal-nav:active {
-            transform: translateY(-50%) scale(0.95);
-        }
-        
-        .modal-caption {
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 18px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 10px 20px;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .photo-item {
-            cursor: pointer;
+        #back-to-top i {
             transition: transform 0.3s ease;
         }
         
-        .photo-item:hover {
-            transform: translateY(-4px);
-        }
-        
-        .photo-item img {
-            transition: transform 0.3s ease;
-        }
-        
-        .photo-item:hover img {
-            transform: scale(1.05);
+        #back-to-top:hover i {
+            transform: translateY(-2px);
         }
         
         @media (max-width: 768px) {
-            .modal-nav {
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
                 width: 50px;
                 height: 50px;
-                font-size: 24px;
-                padding: 15px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .orb, nav, footer, #back-to-top, #scroll-progress {
+                display: none !important;
             }
             
-            .modal-nav.prev {
-                left: 10px;
+            body {
+                background: white;
+                color: black;
             }
             
-            .modal-nav.next {
-                right: 10px;
+            .glass-card {
+                background: white;
+                border: 1px solid #ccc;
+                box-shadow: none;
             }
             
-            .modal-close {
-                top: -40px;
-                width: 40px;
-                height: 40px;
-                font-size: 30px;
-            }
-            
-            .modal-caption {
-                font-size: 14px;
-                bottom: -40px;
+            a {
+                color: #0066cc;
+                text-decoration: underline;
             }
         }
     </style>
 </head>
 <body class="smooth-scroll">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Floating orbs background -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
     
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress"></div>
-    
     <div class="content-wrapper">
         <!-- Navigation -->
-        <nav class="fixed top-0 w-full glass-card z-50">
+        <nav class="fixed top-0 w-full glass-card z-50" role="navigation" aria-label="Main navigation">
             <div class="container mx-auto px-4 md:px-6 py-3 md:py-4">
                 <div class="flex items-center justify-between">
-                    <div class="text-base md:text-lg font-semibold tracking-tight">
-                        GROUP 4
-                    </div>
+                    <a href="index.html" class="text-base md:text-lg font-semibold tracking-tight">GROUP 4</a>
                     <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                        <a href="#home" class="nav-link text-gray-300 hover:text-white dark-mode-text">Home</a>
-                        <a href="#group" class="nav-link text-gray-300 hover:text-white dark-mode-text">Group</a>
-                        <a href="#overview" class="nav-link text-gray-300 hover:text-white dark-mode-text">Overview</a>
-                        <a href="#visit" class="nav-link text-gray-300 hover:text-white dark-mode-text">Visit</a>
-                        <a href="#media" class="nav-link text-gray-300 hover:text-white dark-mode-text">Media</a>
-                        <a href="#score" class="nav-link text-gray-300 hover:text-white dark-mode-text">Score</a>
-                        <a href="#analysis" class="nav-link text-gray-300 hover:text-white dark-mode-text">Analysis</a>
-                        <a href="#recommendations" class="nav-link text-gray-300 hover:text-white dark-mode-text">Recommendations</a>
+                        <a href="index.html" class="nav-link active text-white dark-mode-text" aria-current="page">Home</a>
+                        <a href="group.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Group</a>
+                        <a href="overview.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Overview</a>
+                        <a href="visit.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Visit</a>
+                        <a href="media.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Media</a>
+                        <a href="score.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Score</a>
+                        <a href="analysis.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Analysis</a>
+                        <a href="recommendations.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Recommendations</a>
                         <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
                             <i class="fas fa-sun text-xl text-yellow-400 hidden dark-mode-icon" id="sun-icon"></i>
                             <i class="fas fa-moon text-xl text-blue-300" id="moon-icon"></i>
@@ -762,21 +581,22 @@
                 </div>
                 <div class="hidden md:hidden mt-4 pb-4" id="mobile-menu">
                     <div class="flex flex-col space-y-3 text-sm">
-                        <a href="#home" class="text-gray-300 hover:text-white transition-colors py-2">Home</a>
-                        <a href="#group" class="text-gray-300 hover:text-white transition-colors py-2">Group</a>
-                        <a href="#overview" class="text-gray-300 hover:text-white transition-colors py-2">Overview</a>
-                        <a href="#visit" class="text-gray-300 hover:text-white transition-colors py-2">Visit</a>
-                        <a href="#media" class="text-gray-300 hover:text-white transition-colors py-2">Media</a>
-                        <a href="#score" class="text-gray-300 hover:text-white transition-colors py-2">Score</a>
-                        <a href="#analysis" class="text-gray-300 hover:text-white transition-colors py-2">Analysis</a>
-                        <a href="#recommendations" class="text-gray-300 hover:text-white transition-colors py-2">Recommendations</a>
+                        <a href="index.html" class="text-white transition-colors py-2">Home</a>
+                        <a href="group.html" class="text-gray-300 hover:text-white transition-colors py-2">Group</a>
+                        <a href="overview.html" class="text-gray-300 hover:text-white transition-colors py-2">Overview</a>
+                        <a href="visit.html" class="text-gray-300 hover:text-white transition-colors py-2">Visit</a>
+                        <a href="media.html" class="text-gray-300 hover:text-white transition-colors py-2">Media</a>
+                        <a href="score.html" class="text-gray-300 hover:text-white transition-colors py-2">Score</a>
+                        <a href="analysis.html" class="text-gray-300 hover:text-white transition-colors py-2">Analysis</a>
+                        <a href="recommendations.html" class="text-gray-300 hover:text-white transition-colors py-2">Recommendations</a>
                     </div>
                 </div>
             </div>
         </nav>
 
         <!-- Hero Section -->
-        <section id="home" class="min-h-screen flex items-center justify-center px-4 md:px-6 pt-20 parallax-section">
+        <main id="main-content">
+        <section id="home" class="min-h-screen flex items-center justify-center px-4 md:px-6 pt-20">
             <div class="container mx-auto max-w-5xl text-center">
                 <p class="section-number mb-4 text-xs md:text-sm">Tourism Competitiveness Analysis</p>
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6 leading-tight">
@@ -787,738 +607,132 @@
                     An E-Portfolio presenting comprehensive analysis of tourism competitiveness
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4 px-4">
-                    <a href="#overview" class="btn-primary px-6 md:px-8 py-3 text-xs md:text-sm font-medium rounded-full text-white">
+                    <a href="overview.html" class="btn-primary px-6 md:px-8 py-3 text-xs md:text-sm font-medium rounded-full text-white">
                         View Analysis
                     </a>
-                    <a href="#group" class="btn-secondary px-6 md:px-8 py-3 text-xs md:text-sm font-medium rounded-full text-white">
+                    <a href="group.html" class="btn-secondary px-6 md:px-8 py-3 text-xs md:text-sm font-medium rounded-full text-white">
                         Our Team
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Group Details Section -->
-        <section id="group" class="py-16 md:py-24 px-4 md:px-6 fade-in-up">
+        <!-- Preview Sections -->
+        <section class="px-4 md:px-6 fade-in-up">
             <div class="container mx-auto max-w-6xl">
-                <p class="section-number text-center mb-2">01</p>
-                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Group Details</h2>
+                <p class="section-number text-center mb-2">Explore Our Analysis</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Portfolio Sections</h2>
                 <div class="section-divider"></div>
                 
-                <div class="glass-card rounded-2xl p-4 md:p-12">
-                    <h3 class="text-xl md:text-2xl font-light text-center mb-6 md:mb-12 text-gray-300">Our Team</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
-                                <img src="photos/Zuhairah.png" alt="ZUHAIRAH BINTI ZULKEPLY" class="w-full h-full object-cover object-center">
-                            </div>
-                            <p class="text-sm font-medium mb-1">ZUHAIRAH BINTI ZULKEPLY</p>
-                            <p class="text-xs text-gray-400 mt-1">2025872458</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <!-- Group Preview -->
+                    <a href="group.html" class="preview-card glass-card rounded-xl p-6 md:p-8 border border-white/20 block">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4 preview-icon">
+                            <i class="fas fa-users text-2xl text-blue-300"></i>
                         </div>
-                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
-                                <img src="photos/Saidatul.png" alt="NUR SAIDATUL BALQIS BINTI AZHAR" class="w-full h-full object-cover object-center">
-                            </div>
-                            <p class="text-sm font-medium mb-1">NUR SAIDATUL BALQIS BINTI AZHAR</p>
-                            <p class="text-xs text-gray-400 mt-1">2025855008</p>
+                        <h3 class="text-xl font-medium mb-3">Group Details</h3>
+                        <p class="text-gray-400 text-sm mb-4">Meet our team of 6 members who conducted this comprehensive analysis</p>
+                        <span class="text-cyan-400 text-sm font-medium">View Details →</span>
+                    </a>
+
+                    <!-- Overview Preview -->
+                    <a href="overview.html" class="preview-card glass-card rounded-xl p-6 md:p-8 border border-white/20 block">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4 preview-icon">
+                            <i class="fas fa-map-marked-alt text-2xl text-blue-300"></i>
                         </div>
-                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
-                                <img src="photos/Shakirah.png" alt="SITI SYAKIRAH BINTI MOHD SALLEH" class="w-full h-full object-cover object-center">
-                            </div>
-                            <p class="text-sm font-medium mb-1">SITI SYAKIRAH BINTI MOHD SALLEH</p>
-                            <p class="text-xs text-gray-400 mt-1">2025819116</p>
+                        <h3 class="text-xl font-medium mb-3">Attraction Overview</h3>
+                        <p class="text-gray-400 text-sm mb-4">Learn about A'Famosa Water World's location, history, and key features</p>
+                        <span class="text-cyan-400 text-sm font-medium">View Details →</span>
+                    </a>
+
+                    <!-- Visit Preview -->
+                    <a href="visit.html" class="preview-card glass-card rounded-xl p-6 md:p-8 border border-white/20 block">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4 preview-icon">
+                            <i class="fas fa-calendar-check text-2xl text-blue-300"></i>
                         </div>
-                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
-                                <img src="photos/Alya.png" alt="NURUL ALYA NABILAH BINTI NORHISHAM" class="w-full h-full object-cover object-center">
-                            </div>
-                            <p class="text-sm font-medium mb-1">NURUL ALYA NABILAH BINTI NORHISHAM</p>
-                            <p class="text-xs text-gray-400 mt-1">2025857998</p>
+                        <h3 class="text-xl font-medium mb-3">Site Visit Plan</h3>
+                        <p class="text-gray-400 text-sm mb-4">Our preparation, strategies, and overall experience from the site visit</p>
+                        <span class="text-cyan-400 text-sm font-medium">View Details →</span>
+                    </a>
+
+                    <!-- Media Preview -->
+                    <a href="media.html" class="preview-card glass-card rounded-xl p-6 md:p-8 border border-white/20 block">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4 preview-icon">
+                            <i class="fas fa-photo-video text-2xl text-blue-300"></i>
                         </div>
-                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
-                                <img src="photos/Hakim.png" alt="LUQMAN AL-HAKIM BIN ZULKEFLEE" class="w-full h-full object-cover object-center">
-                            </div>
-                            <p class="text-sm font-medium mb-1">LUQMAN AL-HAKIM BIN ZULKEFLEE</p>
-                            <p class="text-xs text-gray-400 mt-1">2025402788</p>
+                        <h3 class="text-xl font-medium mb-3">Visual & Media</h3>
+                        <p class="text-gray-400 text-sm mb-4">Photos, videos, and audio recordings from our site visit</p>
+                        <span class="text-cyan-400 text-sm font-medium">View Details →</span>
+                    </a>
+
+                    <!-- Score Preview -->
+                    <a href="score.html" class="preview-card glass-card rounded-xl p-6 md:p-8 border border-white/20 block">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4 preview-icon">
+                            <i class="fas fa-chart-bar text-2xl text-blue-300"></i>
                         </div>
-                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
-                                <img src="photos/Aqil.png" alt="AQIL FIQRIE BIN MOHD FAUZI" class="w-full h-full object-cover object-center">
-                            </div>
-                            <p class="text-sm font-medium mb-1">AQIL FIQRIE BIN MOHD FAUZI</p>
-                            <p class="text-xs text-gray-400 mt-1">2025857998</p>
+                        <h3 class="text-xl font-medium mb-3">Competitiveness Score</h3>
+                        <p class="text-gray-400 text-sm mb-4">Detailed scoring across 7 key indicators with visualizations</p>
+                        <span class="text-cyan-400 text-sm font-medium">View Details →</span>
+                    </a>
+
+                    <!-- Analysis Preview -->
+                    <a href="analysis.html" class="preview-card glass-card rounded-xl p-6 md:p-8 border border-white/20 block">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4 preview-icon">
+                            <i class="fas fa-chart-line text-2xl text-blue-300"></i>
                         </div>
-                    </div>
+                        <h3 class="text-xl font-medium mb-3">Analysis Summary</h3>
+                        <p class="text-gray-400 text-sm mb-4">Executive summary with key strengths and areas of concern</p>
+                        <span class="text-cyan-400 text-sm font-medium">View Details →</span>
+                    </a>
+
+                    <!-- Recommendations Preview -->
+                    <a href="recommendations.html" class="preview-card glass-card rounded-xl p-6 md:p-8 border border-white/20 block">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4 preview-icon">
+                            <i class="fas fa-lightbulb text-2xl text-blue-300"></i>
+                        </div>
+                        <h3 class="text-xl font-medium mb-3">Recommendations</h3>
+                        <p class="text-gray-400 text-sm mb-4">Actionable recommendations for improvement across all indicators</p>
+                        <span class="text-cyan-400 text-sm font-medium">View Details →</span>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Overview Section -->
-        <section id="overview" class="px-4 md:px-6 fade-in-up">
+        <!-- Quick Stats Preview -->
+        <section class="px-4 md:px-6 fade-in-up">
             <div class="container mx-auto max-w-6xl">
-                <p class="section-number text-center mb-2">02</p>
-                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Attraction Overview</h2>
-                <div class="section-divider"></div>
-                
-                <div class="grid md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
-                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Location</h3>
-                        <p class="text-gray-400 leading-relaxed text-xs md:text-sm mb-4">
-                            A'Famosa water World is located in the historic city of Melaka, Malaysia. 
-                            Situated in a prime location accessible from major highways, the waterpark offers 
-                            easy access for both local and international visitors. The strategic location 
-                            combines the charm of historical Melaka with modern entertainment facilities.
-                        </p>
-                        <a href="https://www.melakawonderland.com.my/bm/" 
-                           target="_blank" 
-                           rel="noopener noreferrer"
-                           class="inline-flex items-center text-xs text-cyan-400 hover:text-cyan-300 transition-colors">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            Visit Official Website
-                        </a>
-                    </div>
-                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">History</h3>
-                        <p class="text-gray-400 leading-relaxed text-xs md:text-sm">
-                            Established as one of Melaka's premier family entertainment destinations, 
-                            A'Famosa water World has been serving visitors for several years. The park 
-                            was developed to complement Melaka's growing tourism industry, providing 
-                            a modern recreational facility that appeals to families and adventure seekers 
-                            visiting the UNESCO World Heritage city.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Embedded Map -->
-                <div class="glass-card rounded-xl p-0 border border-white/20 overflow-hidden mb-8 md:mb-12">
-                    <div class="h-64 md:h-96 w-full map-container">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.239498391521!2d102.2127142!3d2.4269654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31ce0236fe1b1d4d%3A0xf8491004587e0128!2sA%27Famosa%20Water%20Theme%20Park%20(Water%20World)!5e0!3m2!1sen!2smy!4v1763707051263!5m2!1sen!2smy" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                    <div class="p-4 md:p-6 border-t border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-2">Location Map</h3>
-                        <p class="text-xs md:text-sm text-gray-400">A'Famosa Water Theme Park (Water World), Melaka, Malaysia</p>
-                    </div>
-                </div>
-                
-                <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
-                    <h3 class="text-lg md:text-xl font-medium mb-6 md:mb-8 text-center">Key Features</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/20">
-                            <p class="text-sm font-medium mb-2">Water Slides</p>
-                            <p class="text-xs text-gray-400">Thrilling water slides for all ages</p>
-                        </div>
-                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/20">
-                            <p class="text-sm font-medium mb-2">Wave Pool</p>
-                            <p class="text-xs text-gray-400">Experience artificial waves</p>
-                        </div>
-                        <div class="text-center py-6 border-b md:border-b-0 border-white/20">
-                            <p class="text-sm font-medium mb-2">Kid Area</p>
-                            <p class="text-xs text-gray-400">Safe play area for children</p>
-                        </div>
-                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/20">
-                            <p class="text-sm font-medium mb-2">Food Stall</p>
-                            <p class="text-xs text-gray-400">Food and beverage options</p>
-                        </div>
-                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/20">
-                            <p class="text-sm font-medium mb-2">Seating Area</p>
-                            <p class="text-xs text-gray-400">Outdoor seating for visitors to sit and eat</p>
-                        </div>
-                        <div class="text-center py-6 md:border-r-0 border-white/20">
-                            <p class="text-sm font-medium mb-2">Souvenir Store</p>
-                            <p class="text-xs text-gray-400">Gift shop with merchandise and souvenirs</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Site Visit Plan Section -->
-        <section id="visit" class="px-4 md:px-6 fade-in-up">
-            <div class="container mx-auto max-w-6xl">
-                <p class="section-number text-center mb-2">03</p>
-                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Site Visit Plan</h2>
-                <div class="section-divider"></div>
-                
-                <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Group Preparation</h3>
-                        <ul class="space-y-3 text-xs md:text-sm text-gray-300">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Research on waterpark facilities</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Review competitiveness indicators</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Prepare observation checklist</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Coordinate visit schedule</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Assign roles and responsibilities</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Group Strategies</h3>
-                        <ul class="space-y-3 text-xs md:text-sm text-gray-300">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Divide into observation teams</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Systematic data collection approach</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Photo and video documentation</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Visitor interaction for feedback</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Real-time note-taking</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Overall Experience</h3>
-                        <p class="text-xs md:text-sm text-gray-300 leading-relaxed mb-4">
-                            Our site visit to A'Famosa water World provided valuable insights into 
-                            the operational aspects, visitor experience, and overall competitiveness of 
-                            the attraction. We observed various facilities, services, and management 
-                            practices that contribute to the park's appeal and areas for potential improvement.
-                        </p>
-                        <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
-                            The visit enabled us to gather first-hand data and observations that form the 
-                            basis of our competitiveness analysis.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Media Section -->
-        <section id="media" class="px-4 md:px-6 fade-in-up">
-            <div class="container mx-auto max-w-6xl">
-                <p class="section-number text-center mb-2">04</p>
-                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Visual & Multimedia Materials</h2>
-                <div class="section-divider"></div>
-                
-                <div class="mb-8 md:mb-12">
-                    <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Photos</h3>
-                    <div class="grid md:grid-cols-3 gap-4 md:gap-6">
-                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5918.jpg" data-caption="Front Signage">
-                            <div class="h-64 overflow-hidden">
-                                <img src="photos/IMG_5918.jpg" alt="Front Signage" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm font-medium">Front Signage</p>
-                            </div>
-                        </div>
-                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5933.jpg" data-caption="Water Slides">
-                            <div class="h-64 overflow-hidden">
-                                <img src="photos/IMG_5933.jpg" alt="Water Slides" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm font-medium">Water Slides</p>
-                            </div>
-                        </div>
-                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5910.jpg" data-caption="Souvenir Store">
-                            <div class="h-64 overflow-hidden">
-                                <img src="photos/IMG_5910.jpg" alt="Souvenir Store" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm font-medium">Souvenir Store</p>
-                            </div>
-                        </div>
-                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5946.jpg" data-caption="Food Stall">
-                            <div class="h-64 overflow-hidden">
-                                <img src="photos/IMG_5946.jpg" alt="Food Stall" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm font-medium">Food Stall</p>
-                            </div>
-                        </div>
-                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5939.jpg" data-caption="Kid Area">
-                            <div class="h-64 overflow-hidden">
-                                <img src="photos/IMG_5939.jpg" alt="Kid Area" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm font-medium">Kid Area</p>
-                            </div>
-                        </div>
-                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5947.jpg" data-caption="Seating Area">
-                            <div class="h-64 overflow-hidden">
-                                <img src="photos/IMG_5947.jpg" alt="Seating Area" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm font-medium">Seating Area</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-8 md:mb-12">
-                    <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Videos</h3>
-                    <div class="glass-card border border-white/20 overflow-hidden rounded-xl">
-                        <div class="w-full">
-                            <video controls class="w-full h-auto" style="max-height: 70vh;">
-                                <source src="photos/WhatsApp Video 2025-12-30 at 10.51.13 PM.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="p-4">
-                            <p class="text-sm font-medium">Site Visit Vlog</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Audio Recordings</h3>
-                    <div class="glass-card border border-white/20 p-4 md:p-8 rounded-xl">
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between border-b border-white/20 pb-4">
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mr-4">
-                                        <i class="fas fa-headphones text-blue-300"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-medium">Visitor Interview</p>
-                                        <p class="text-xs text-gray-400">Feedback from family visitors</p>
-                                    </div>
-                                </div>
-                                <audio controls class="h-10">
-                                    <source src="voice/WhatsApp Audio 2025-11-21 at 2.27.08 PM.mp4" type="audio/mp4">
-                                    Your browser does not support the audio element.
-                                </audio>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Competitiveness Score Section -->
-        <section id="score" class="px-4 md:px-6 fade-in-up">
-            <div class="container mx-auto max-w-6xl">
-                <p class="section-number text-center mb-2">05</p>
-                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Competitiveness Score</h2>
-                <div class="section-divider"></div>
-                
-                <div class="glass-card border border-white/20 p-6 md:p-12 mb-8 text-center rounded-xl fade-in">
-                    <p class="text-xs md:text-sm text-gray-400 mb-4 uppercase tracking-wider">Overall Score</p>
+                <div class="glass-card rounded-xl p-8 md:p-12 border border-white/20 text-center">
+                    <p class="text-xs md:text-sm text-gray-400 mb-4 uppercase tracking-wider">Overall Competitiveness Score</p>
                     <p class="text-5xl md:text-7xl font-light mb-2 gradient-text">85<span class="text-3xl md:text-4xl">%</span></p>
-                    <p class="text-xs md:text-sm text-gray-400">Competitiveness Rating</p>
-                </div>
-
-                <!-- Chart Visualization -->
-                <div class="glass-card border border-white/20 rounded-xl p-4 md:p-8 mb-8 fade-in-up">
-                    <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6 text-center">Score Visualization</h3>
-                    <div class="max-w-2xl mx-auto">
-                        <div class="h-[380px] md:h-[400px]">
-                            <canvas id="scoreChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-card border border-white/20 rounded-xl overflow-hidden fade-in-up">
-                    <div class="p-4 md:p-8 border-b border-white/20">
-                        <h3 class="text-xl font-medium">Analysis Sheet Scores</h3>
-                    </div>
-                    <div class="w-full">
-                        <table class="w-full table-auto">
-                            <thead>
-                                <tr class="border-b border-white/20">
-                                    <th class="px-2 md:px-6 py-3 md:py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider w-auto">Indicator</th>
-                                    <th class="px-2 md:px-6 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider w-16 md:w-auto">Score</th>
-                                    <th class="px-2 md:px-6 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider w-16 md:w-auto">Max</th>
-                                    <th class="px-2 md:px-6 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider w-20 md:w-auto">%</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-white/10">
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-xs md:text-sm">Accessibility</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm font-medium">8</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm text-gray-400">10</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center">
-                                        <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-500/20 text-blue-300 rounded-full">80%</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-xs md:text-sm">Facilities & Amenities</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm font-medium">9</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm text-gray-400">10</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center">
-                                        <span class="inline-block px-2 py-1 text-xs font-medium bg-cyan-500/20 text-cyan-300 rounded-full">90%</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-xs md:text-sm">Safety & Security</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm font-medium">8</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm text-gray-400">10</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center">
-                                        <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-500/20 text-blue-300 rounded-full">80%</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-xs md:text-sm">Service Quality</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm font-medium">7</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm text-gray-400">10</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center">
-                                        <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-400/20 text-blue-300 rounded-full">70%</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-xs md:text-sm">Value for Money</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm font-medium">8</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm text-gray-400">10</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center">
-                                        <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-500/20 text-blue-300 rounded-full">80%</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-xs md:text-sm">Marketing & Promotion</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm font-medium">7</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm text-gray-400">10</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center">
-                                        <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-400/20 text-blue-300 rounded-full">70%</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-xs md:text-sm">Environmental Sustainability</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm font-medium">8</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm text-gray-400">10</td>
-                                    <td class="px-2 md:px-6 py-3 md:py-4 text-center">
-                                        <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-500/20 text-blue-300 rounded-full">80%</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Competitiveness Analysis Summary -->
-        <section id="analysis" class="px-4 md:px-6 fade-in-up">
-            <div class="container mx-auto max-w-4xl">
-                <p class="section-number text-center mb-2">06</p>
-                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Competitiveness Analysis Summary</h2>
-                <div class="section-divider"></div>
-                
-                <div class="glass-card border border-white/20 p-4 md:p-12 rounded-xl">
-                    <h3 class="text-xl md:text-2xl font-light mb-4 md:mb-6">Executive Summary</h3>
-                    <p class="text-gray-300 leading-relaxed mb-4 md:mb-6 text-xs md:text-sm">
-                        A'Famosa water World demonstrates a strong competitive position in the 
-                        regional tourism market, achieving an overall competitiveness score of 85%. 
-                        The analysis reveals several key strengths and areas for improvement based on 
-                        comprehensive on-site observations and data collection.
-                    </p>
-                    
-                    <h4 class="text-lg md:text-xl font-medium mt-6 md:mt-8 mb-3 md:mb-4">Key Strengths</h4>
-                    <ul class="space-y-2 mb-6 md:mb-8 text-gray-300 text-xs md:text-sm">
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Excellent facilities and amenities with modern water attractions</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Good accessibility with convenient location and parking facilities</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Strong safety measures and security protocols in place</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Reasonable pricing structure offering good value for money</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Environmental consciousness with sustainable practices</span>
-                        </li>
-                    </ul>
-                    
-                    <h4 class="text-lg md:text-xl font-medium mt-6 md:mt-8 mb-3 md:mb-4">Areas of Concern</h4>
-                    <ul class="space-y-2 mb-6 md:mb-8 text-gray-300 text-xs md:text-sm">
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Service quality shows room for improvement in staff training and responsiveness</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Marketing and promotion efforts could be enhanced to reach wider audiences</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Some facilities may require maintenance and modernization</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-3 text-blue-400 mt-1">•</span>
-                            <span>Visitor information and signage could be more comprehensive</span>
-                        </li>
-                    </ul>
-                    
-                    <h4 class="text-lg md:text-xl font-medium mt-6 md:mt-8 mb-3 md:mb-4">Observations from Site Visit</h4>
-                    <p class="text-gray-300 leading-relaxed mb-4 text-xs md:text-sm">
-                        During our site visit, we observed that the waterpark maintains a clean and 
-                        well-organized environment. The facilities are generally well-maintained, 
-                        with clear safety protocols visible throughout the park. Visitor flow was 
-                        managed effectively, though peak hours showed some congestion at popular 
-                        attractions. Staff presence was adequate, though response times to visitor 
-                        inquiries varied.
-                    </p>
-                    <p class="text-gray-300 leading-relaxed text-xs md:text-sm">
-                        The park's location provides good accessibility, with adequate parking and 
-                        proximity to other tourist attractions in Melaka. However, digital presence 
-                        and online booking systems could be improved to enhance visitor convenience. 
-                        Overall, A'Famosa water World presents a solid foundation for 
-                        competitiveness with strategic improvements needed in specific areas.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Recommendations Section -->
-        <section id="recommendations" class="px-4 md:px-6 fade-in-up">
-            <div class="container mx-auto max-w-6xl">
-                <p class="section-number text-center mb-2">07</p>
-                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Recommendations for Improvement</h2>
-                <div class="section-divider"></div>
-                
-                <div class="space-y-4">
-                    <div class="glass-card border-l-4 border-cyan-400 p-4 md:p-8 rounded-xl border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Accessibility <span class="text-xs md:text-sm font-normal text-gray-400">(Score: 80%)</span></h3>
-                        <ul class="space-y-2 text-gray-300 text-xs md:text-sm">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Enhance public transportation connectivity with shuttle services from major hotels</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Improve signage on main roads leading to the waterpark</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Consider partnerships with ride-sharing services for visitor convenience</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Expand parking capacity during peak seasons</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="glass-card border-l-4 border-blue-400 p-4 md:p-8 rounded-xl border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Facilities & Amenities <span class="text-xs md:text-sm font-normal text-gray-400">(Score: 90%)</span></h3>
-                        <ul class="space-y-2 text-gray-300 text-xs md:text-sm">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Regular maintenance schedule for all water attractions</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Add more shaded areas and rest zones throughout the park</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Enhance locker facilities with digital access systems</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Consider adding VIP areas or premium experiences</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="glass-card border-l-4 border-cyan-400 p-4 md:p-8 rounded-xl border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Safety & Security <span class="text-xs md:text-sm font-normal text-gray-400">(Score: 80%)</span></h3>
-                        <ul class="space-y-2 text-gray-300 text-xs md:text-sm">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Increase lifeguard presence and visibility at all water areas</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Implement regular safety drills and training programs</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Enhance first aid facilities and medical response capabilities</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Improve CCTV coverage and monitoring systems</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="glass-card border-l-4 border-blue-400 p-4 md:p-8 rounded-xl border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Service Quality <span class="text-xs md:text-sm font-normal text-gray-400">(Score: 70%)</span></h3>
-                        <ul class="space-y-2 text-gray-300 text-xs md:text-sm">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Implement comprehensive staff training programs focusing on customer service</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Establish clear service standards and performance metrics</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Introduce visitor feedback systems for continuous improvement</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Reduce waiting times at ticket counters and food outlets</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Train staff in multiple languages to serve international visitors</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="glass-card border-l-4 border-blue-400 p-4 md:p-8 rounded-xl border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Value for Money <span class="text-xs md:text-sm font-normal text-gray-400">(Score: 80%)</span></h3>
-                        <ul class="space-y-2 text-gray-300 text-xs md:text-sm">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Introduce flexible pricing packages for different visitor segments</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Offer family packages and group discounts</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Enhance food and beverage value propositions</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Consider annual pass options for local residents</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="glass-card border-l-4 border-blue-400 p-4 md:p-8 rounded-xl border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Marketing & Promotion <span class="text-xs md:text-sm font-normal text-gray-400">(Score: 70%)</span></h3>
-                        <ul class="space-y-2 text-gray-300 text-xs md:text-sm">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Develop a comprehensive digital marketing strategy including social media</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Create engaging content showcasing unique attractions and experiences</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Partner with travel agencies and tour operators</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Implement online booking system with promotional offers</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-blue-400 mt-1">•</span>
-                                <span>Participate in tourism fairs and exhibitions</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="glass-card border-l-4 border-cyan-400 p-4 md:p-8 rounded-xl border border-white/20">
-                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Environmental Sustainability <span class="text-xs md:text-sm font-normal text-gray-400">(Score: 80%)</span></h3>
-                        <ul class="space-y-2 text-gray-300 text-xs md:text-sm">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Implement water recycling and conservation systems</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Reduce plastic usage and promote eco-friendly alternatives</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Enhance waste management and recycling programs</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Consider solar energy installations for power needs</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-cyan-400 mt-1">•</span>
-                                <span>Develop educational programs on environmental conservation</span>
-                            </li>
-                        </ul>
-                    </div>
+                    <p class="text-xs md:text-sm text-gray-400 mb-8">Based on comprehensive analysis</p>
+                    <a href="score.html" class="btn-primary px-6 md:px-8 py-3 text-xs md:text-sm font-medium rounded-full text-white inline-block">
+                        View Detailed Scores
+                    </a>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="border-t border-white/20 py-8 md:py-12 px-4 md:px-6">
+        <footer class="border-t border-white/20 py-8 md:py-10 px-4 md:px-6 mt-16 md:mt-20">
             <div class="container mx-auto text-center">
                 <p class="text-sm text-gray-400 mb-2">&copy; 2025 A'Famosa water World E-Portfolio</p>
-                <p class="text-xs text-gray-500 mb-4">Tourism Competitiveness Analysis Project</p>
-                <a href="https://www.afamosa.com/water-theme-park" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   class="inline-flex items-center px-6 py-2 border border-white/20 text-sm font-medium text-white hover:bg-white/10 rounded-full transition-colors">
-                    <i class="fas fa-external-link-alt mr-2"></i>
-                    Visit Official Website
-                </a>
+                <p class="text-xs text-gray-500">Tourism Competitiveness Analysis Project</p>
             </div>
         </footer>
+        </main>
     </div>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" aria-label="Back to top">
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Image Modal/Lightbox -->
-    <div id="imageModal" class="image-modal">
-        <div class="modal-content">
-            <span class="modal-close" id="modalClose">&times;</span>
-            <button class="modal-nav prev" id="modalPrev" aria-label="Previous image">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <img id="modalImage" class="modal-image" src="" alt="">
-            <button class="modal-nav next" id="modalNext" aria-label="Next image">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="modal-caption" id="modalCaption"></div>
-        </div>
-    </div>
-
     <!-- Theme Toggle Script -->
     <script>
-        // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
         const themeToggleMobile = document.getElementById('theme-toggle-mobile');
         const html = document.documentElement;
         
-        // Get saved theme or default to dark
         const currentTheme = localStorage.getItem('theme') || 'dark';
         html.setAttribute('data-theme', currentTheme);
         
@@ -1545,49 +759,7 @@
             menu.classList.toggle('hidden');
         });
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu if open
-                    document.getElementById('mobile-menu').classList.add('hidden');
-                }
-            });
-        });
-
-        // Scroll Progress Bar
-        window.addEventListener('scroll', function() {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scroll-progress').style.width = scrolled + '%';
-        });
-
-        // Back to Top Button
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('show');
-            } else {
-                backToTopButton.classList.remove('show');
-            }
-        });
-
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Scroll Animations using Intersection Observer
+        // Scroll Animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1601,316 +773,45 @@
             });
         }, observerOptions);
 
-        // Observe all elements with fade-in classes
-        document.querySelectorAll('.fade-in-up, .fade-in').forEach(el => {
+        document.querySelectorAll('.fade-in-up').forEach(el => {
             observer.observe(el);
         });
-
-        // Parallax Effect
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallaxSection = document.querySelector('.parallax-section');
-            if (parallaxSection) {
-                const speed = scrolled * 0.3;
-                parallaxSection.style.transform = `translateY(${speed}px)`;
-            }
-        });
-
-        // Chart.js Visualization for Scores with Enhanced Gradients
-        const ctx = document.getElementById('scoreChart');
-        if (ctx) {
-            const scores = [80, 90, 80, 70, 80, 70, 80];
-            const fullLabels = ['Accessibility', 'Facilities & Amenities', 'Safety & Security', 'Service Quality', 'Value for Money', 'Marketing & Promotion', 'Environmental Sustainability'];
-            const shortLabels = ['Accessibility', 'Facilities', 'Safety', 'Service', 'Value', 'Marketing', 'Environment'];
-            const isMobile = window.innerWidth < 768;
-            const labels = isMobile ? shortLabels : fullLabels;
-            
-            // Create enhanced gradients for each bar
-            function createGradient(chart, colors) {
-                const chartArea = chart.chartArea;
-                if (!chartArea) {
-                    return null;
-                }
-                
-                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-                
-                // Multi-stop gradient for enhanced effect
-                gradient.addColorStop(0, colors[0]); // Bottom - darker
-                gradient.addColorStop(0.3, colors[1]); // Mid-bottom
-                gradient.addColorStop(0.6, colors[2]); // Mid-top
-                gradient.addColorStop(1, colors[3]); // Top - lighter/brightest
-                
-                return gradient;
-            }
-            
-            // Blue gradient color schemes
-            const colorSchemes = [
-                // Blue gradient for 80%
-                ['rgba(37, 99, 235, 0.9)', 'rgba(59, 130, 246, 0.85)', 'rgba(96, 165, 250, 0.8)', 'rgba(147, 197, 253, 0.75)'],
-                // Brighter blue for 90% (highest score)
-                ['rgba(59, 130, 246, 0.9)', 'rgba(96, 165, 250, 0.85)', 'rgba(147, 197, 253, 0.8)', 'rgba(191, 219, 254, 0.75)'],
-                // Deeper blue for 70% (lower score)
-                ['rgba(29, 78, 216, 0.9)', 'rgba(37, 99, 235, 0.85)', 'rgba(59, 130, 246, 0.8)', 'rgba(96, 165, 250, 0.75)']
-            ];
-            
-            // Set initial colors first (blue gradient base)
-            const initialColors = scores.map((value) => {
-                if (value === 90) return 'rgba(96, 165, 250, 0.9)'; // Bright blue
-                if (value === 70) return 'rgba(37, 99, 235, 0.9)'; // Deep blue
-                return 'rgba(59, 130, 246, 0.9)'; // Medium blue
-            });
-            
-            const initialBorderColors = scores.map((value) => {
-                if (value === 90) return 'rgba(147, 197, 253, 0.6)'; // Light blue
-                if (value === 70) return 'rgba(59, 130, 246, 0.5)'; // Medium blue
-                return 'rgba(96, 165, 250, 0.55)'; // Medium blue
-            });
-            
-            const scoreChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Score (%)',
-                        data: scores,
-                        backgroundColor: initialColors,
-                        borderColor: initialBorderColors,
-                        borderWidth: 1,
-                        borderRadius: {
-                            topLeft: 8,
-                            topRight: 8,
-                            bottomLeft: 4,
-                            bottomRight: 4
-                        },
-                        borderSkipped: false
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: {
-                            left: 10,
-                            right: 10,
-                            top: 15,
-                            bottom: isMobile ? 50 : 10
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(30, 41, 59, 0.98)',
-                            titleColor: '#fff',
-                            bodyColor: '#e2e8f0',
-                            borderColor: 'rgba(148, 163, 184, 0.3)',
-                            borderWidth: 1,
-                            padding: 14,
-                            cornerRadius: 8,
-                            displayColors: true,
-                            titleFont: {
-                                size: 13,
-                                weight: '600'
-                            },
-                            bodyFont: {
-                                size: 14,
-                                weight: '500'
-                            },
-                            callbacks: {
-                                label: function(context) {
-                                    return 'Score: ' + context.parsed.y + '%';
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                color: '#9ca3af',
-                                font: {
-                                    size: 12,
-                                    weight: '500'
-                                },
-                                stepSize: 20,
-                                padding: 10
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.08)',
-                                lineWidth: 1,
-                                drawBorder: false
-                            }
-                        },
-                        x: {
-                            ticks: {
-                                color: '#9ca3af',
-                                font: {
-                                    size: isMobile ? 9 : 11,
-                                    weight: '500'
-                                },
-                                maxRotation: isMobile ? 45 : 45,
-                                minRotation: isMobile ? 45 : 45,
-                                padding: isMobile ? 12 : 12
-                            },
-                            grid: {
-                                display: false,
-                                drawBorder: false
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeInOutQuart',
-                        delay: function(context) {
-                            return context.dataIndex * 100;
-                        }
-                    },
-                    interaction: {
-                        intersect: false,
-                        mode: 'index'
-                    },
-                    onHover: (event, activeElements) => {
-                        ctx.canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
-                    }
-                }
-            });
-            
-            // Initialize gradients after chart is created
-            function applyGradients() {
-                const chartArea = scoreChart.chartArea;
-                if (!chartArea || !chartArea.top || !chartArea.bottom) {
-                    setTimeout(applyGradients, 50);
-                    return;
-                }
-                
-                const dataset = scoreChart.data.datasets[0];
-                dataset.backgroundColor = scores.map((value) => {
-                    // All bars use blue gradient
-                    let colors;
-                    if (value === 90) {
-                        colors = colorSchemes[1]; // Brighter blue
-                    } else if (value === 70) {
-                        colors = colorSchemes[2]; // Deeper blue
-                    } else {
-                        colors = colorSchemes[0]; // Standard blue
-                    }
-                    const gradient = createGradient(scoreChart, colors);
-                    return gradient || colors[1]; // Fallback to solid color if gradient fails
-                });
-                
-                dataset.borderColor = initialBorderColors;
-                scoreChart.update('none');
-            }
-            
-            // Apply gradients after chart renders
-            setTimeout(applyGradients, 200);
-            
-            // Add hover effect enhancement
-            ctx.canvas.addEventListener('mousemove', function(event) {
-                const points = scoreChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
-                if (points.length) {
-                    ctx.canvas.style.cursor = 'pointer';
-                } else {
-                    ctx.canvas.style.cursor = 'default';
-                }
-            });
-            
-            // Handle window resize for responsive labels
-            let resizeTimer;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function() {
-                    const newIsMobile = window.innerWidth < 768;
-                    if (newIsMobile !== isMobile) {
-                        scoreChart.data.labels = newIsMobile ? shortLabels : fullLabels;
-                        scoreChart.update();
-                    }
-                }, 250);
-            });
-        }
         
-        // Image Modal/Lightbox Functionality
-        const photoItems = document.querySelectorAll('.photo-item');
-        const modal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
-        const modalCaption = document.getElementById('modalCaption');
-        const modalClose = document.getElementById('modalClose');
-        const modalPrev = document.getElementById('modalPrev');
-        const modalNext = document.getElementById('modalNext');
+        // Mark body as loaded for fade-in effect
+        document.body.classList.add('loaded');
         
-        let currentImageIndex = 0;
-        const images = Array.from(photoItems).map(item => ({
-            src: item.getAttribute('data-image'),
-            caption: item.getAttribute('data-caption')
-        }));
-        
-        // Open modal when clicking on a photo
-        photoItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                currentImageIndex = index;
-                openModal();
-            });
-        });
-        
-        function openModal() {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            updateModalImage();
-        }
-        
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        
-        function updateModalImage() {
-            modalImage.src = images[currentImageIndex].src;
-            modalImage.alt = images[currentImageIndex].caption;
-            modalCaption.textContent = images[currentImageIndex].caption;
-        }
-        
-        function showNextImage() {
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-            updateModalImage();
-        }
-        
-        function showPrevImage() {
-            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-            updateModalImage();
-        }
-        
-        // Event listeners
-        modalClose.addEventListener('click', closeModal);
-        modalNext.addEventListener('click', showNextImage);
-        modalPrev.addEventListener('click', showPrevImage);
-        
-        // Close modal when clicking outside the image
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
+        // Set active navigation based on current page
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const linkPage = link.getAttribute('href');
+            if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            } else {
+                link.classList.remove('active');
+                link.removeAttribute('aria-current');
             }
         });
         
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (!modal.classList.contains('active')) return;
-            
-            if (e.key === 'Escape') {
-                closeModal();
-            } else if (e.key === 'ArrowRight') {
-                showNextImage();
-            } else if (e.key === 'ArrowLeft') {
-                showPrevImage();
+        // Smooth Scroll to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        function toggleBackToTop() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
             }
+        }
+        
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-        
-        // Prevent modal from closing when clicking on the image or navigation buttons
-        modalImage.addEventListener('click', (e) => e.stopPropagation());
-        modalPrev.addEventListener('click', (e) => e.stopPropagation());
-        modalNext.addEventListener('click', (e) => e.stopPropagation());
-        
     </script>
 </body>
 </html>
