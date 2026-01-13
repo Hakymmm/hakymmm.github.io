@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual & Multimedia Materials - A'Famosa water World E-Portfolio</title>
+    <link rel="icon" type="image/png" href="photos/wave.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #1a2332;
+            --secondary: #2a3441;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-blue: #06b6d4;
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --bg-card: rgba(42, 52, 65, 0.6);
+            --bg-card-hover: rgba(52, 62, 75, 0.8);
+            --border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        [data-theme="light"] {
+            --primary: #f8fafc;
+            --secondary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #1e293b;
+            --text-muted: #64748b;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-light), transparent);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card-hover);
+        }
+        
+        .section-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+        
+        .section-divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-blue));
+            margin: 1.5rem auto;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-blue));
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .photo-item {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-4px);
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 40px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: var(--accent-light);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+        
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .modal-nav.prev {
+            left: 20px;
+        }
+        
+        .modal-nav.next {
+            right: 20px;
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        [data-theme="light"] .orb {
+            opacity: 0.1;
+        }
+        
+        [data-theme="light"] .nav-link {
+            color: var(--text-secondary);
+        }
+        
+        [data-theme="light"] .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .dark-mode-text {
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] .dark-mode-text {
+            color: var(--text-secondary);
+        }
+        
+        .dark-mode-icon {
+            display: none;
+        }
+        
+        [data-theme="light"] .dark-mode-icon {
+            display: inline-block;
+        }
+        
+        [data-theme="light"] #moon-icon,
+        [data-theme="light"] #moon-icon-mobile {
+            display: none;
+        }
+        
+        [data-theme="light"] #sun-icon,
+        [data-theme="light"] #sun-icon-mobile {
+            display: inline-block;
+        }
+        
+        [data-theme="light"] .text-gray-300,
+        [data-theme="light"] .text-gray-400,
+        [data-theme="light"] .text-gray-500 {
+            color: #475569;
+        }
+        
+        [data-theme="light"] .text-gray-400 {
+            color: #334155;
+        }
+        
+        [data-theme="light"] .text-gray-500 {
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    
+    <div class="content-wrapper">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full glass-card z-50">
+            <div class="container mx-auto px-4 md:px-6 py-3 md:py-4">
+                <div class="flex items-center justify-between">
+                    <a href="index.html" class="text-base md:text-lg font-semibold tracking-tight">GROUP 4</a>
+                    <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                        <a href="index.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Home</a>
+                        <a href="group.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Group</a>
+                        <a href="overview.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Overview</a>
+                        <a href="visit.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Visit</a>
+                        <a href="media.html" class="nav-link text-white dark-mode-text">Media</a>
+                        <a href="score.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Score</a>
+                        <a href="analysis.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Analysis</a>
+                        <a href="recommendations.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Recommendations</a>
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                            <i class="fas fa-sun text-xl text-yellow-400 hidden dark-mode-icon" id="sun-icon"></i>
+                            <i class="fas fa-moon text-xl text-blue-300" id="moon-icon"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-4 md:hidden">
+                        <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                            <i class="fas fa-sun text-lg text-yellow-400 hidden dark-mode-icon" id="sun-icon-mobile"></i>
+                            <i class="fas fa-moon text-lg text-blue-300" id="moon-icon-mobile"></i>
+                        </button>
+                        <button class="text-white dark-mode-text" id="mobile-menu-btn">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:hidden mt-4 pb-4" id="mobile-menu">
+                    <div class="flex flex-col space-y-3 text-sm">
+                        <a href="index.html" class="text-gray-300 hover:text-white transition-colors py-2">Home</a>
+                        <a href="group.html" class="text-gray-300 hover:text-white transition-colors py-2">Group</a>
+                        <a href="overview.html" class="text-gray-300 hover:text-white transition-colors py-2">Overview</a>
+                        <a href="visit.html" class="text-gray-300 hover:text-white transition-colors py-2">Visit</a>
+                        <a href="media.html" class="text-white transition-colors py-2">Media</a>
+                        <a href="score.html" class="text-gray-300 hover:text-white transition-colors py-2">Score</a>
+                        <a href="analysis.html" class="text-gray-300 hover:text-white transition-colors py-2">Analysis</a>
+                        <a href="recommendations.html" class="text-gray-300 hover:text-white transition-colors py-2">Recommendations</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Media Section -->
+        <section class="px-4 md:px-6 pt-24">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">04</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Visual & Multimedia Materials</h2>
+                <div class="section-divider"></div>
+                
+                <div class="mb-8 md:mb-12">
+                    <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Photos</h3>
+                    <div class="grid md:grid-cols-3 gap-4 md:gap-6">
+                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5918.jpg" data-caption="Front Signage">
+                            <div class="h-64 overflow-hidden">
+                                <img src="photos/IMG_5918.jpg" alt="Front Signage" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300">
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium mb-2">Front Signage</p>
+                                <p class="text-xs text-gray-400 leading-relaxed">The main entrance signage of A'Famosa Water World, featuring the park's branding and welcoming visitors to the water park experience.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5933.jpg" data-caption="Water Slides">
+                            <div class="h-64 overflow-hidden">
+                                <img src="photos/IMG_5933.jpg" alt="Water Slides" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300">
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium mb-2">Water Slides</p>
+                                <p class="text-xs text-gray-400 leading-relaxed">The thrilling water slide attractions at the park, offering various levels of excitement for visitors seeking adventure and fun.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5910.jpg" data-caption="Souvenir Store">
+                            <div class="h-64 overflow-hidden">
+                                <img src="photos/IMG_5910.jpg" alt="Souvenir Store" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300">
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium mb-2">Souvenir Store</p>
+                                <p class="text-xs text-gray-400 leading-relaxed">A retail outlet offering a variety of souvenirs and merchandise, allowing visitors to take home mementos of their visit to A'Famosa Water World.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5946.jpg" data-caption="Food Stall">
+                            <div class="h-64 overflow-hidden">
+                                <img src="photos/IMG_5946.jpg" alt="Food Stall" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300">
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium mb-2">Food Stall</p>
+                                <p class="text-xs text-gray-400 leading-relaxed">Dining facilities providing food and beverage options for visitors, ensuring convenient access to refreshments throughout their visit.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5939.jpg" data-caption="Kid Area">
+                            <div class="h-64 overflow-hidden">
+                                <img src="photos/IMG_5939.jpg" alt="Kid Area" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300">
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium mb-2">Kid Area</p>
+                                <p class="text-xs text-gray-400 leading-relaxed">A dedicated children's play area with age-appropriate attractions and safe water features designed specifically for younger visitors.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl photo-item" data-image="photos/IMG_5947.jpg" data-caption="Seating Area">
+                            <div class="h-64 overflow-hidden">
+                                <img src="photos/IMG_5947.jpg" alt="Seating Area" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300">
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium mb-2">Seating Area</p>
+                                <p class="text-xs text-gray-400 leading-relaxed">Comfortable seating and rest areas provided for visitors to relax, take breaks, and enjoy the park's atmosphere between activities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8 md:mb-12">
+                    <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Videos</h3>
+                    <div class="space-y-6">
+                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl">
+                            <div class="w-full">
+                                <video controls class="w-full h-auto" style="max-height: 70vh;" preload="metadata" poster="">
+                                    <source src="photos/WhatsApp Video 2026-01-10 at 9.30.37 PM.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Interview Video</p>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-card border border-white/20 overflow-hidden rounded-xl">
+                            <div class="w-full">
+                                <video controls class="w-full h-auto" style="max-height: 70vh;" preload="metadata" poster="">
+                                    <source src="photos/WhatsApp Video 2025-12-30 at 10.51.13 PM.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Site Visit Vlog</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/20 py-8 md:py-10 px-4 md:px-6 mt-16 md:mt-20">
+            <div class="container mx-auto text-center">
+                <p class="text-sm text-gray-400 mb-2">HTT167 e-portfolio</p>
+                <p class="text-xs text-gray-500">Tourism Competitiveness Analysis Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Image Modal/Lightbox -->
+    <div id="imageModal" class="image-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <button class="modal-nav prev" id="modalPrev" aria-label="Previous image">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <button class="modal-nav next" id="modalNext" aria-label="Next image">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', currentTheme);
+        
+        function toggleTheme() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        if (themeToggleMobile) {
+            themeToggleMobile.addEventListener('click', toggleTheme);
+        }
+        
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Image Modal/Lightbox Functionality
+        const photoItems = document.querySelectorAll('.photo-item');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const modalClose = document.getElementById('modalClose');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        
+        let currentImageIndex = 0;
+        const images = Array.from(photoItems).map(item => ({
+            src: item.getAttribute('data-image'),
+            caption: item.getAttribute('data-caption')
+        }));
+        
+        photoItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentImageIndex = index;
+                openModal();
+            });
+        });
+        
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            updateModalImage();
+        }
+        
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function updateModalImage() {
+            modalImage.src = images[currentImageIndex].src;
+            modalImage.alt = images[currentImageIndex].caption;
+            modalCaption.textContent = images[currentImageIndex].caption;
+        }
+        
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateModalImage();
+        }
+        
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateModalImage();
+        }
+        
+        modalClose.addEventListener('click', closeModal);
+        modalNext.addEventListener('click', showNextImage);
+        modalPrev.addEventListener('click', showPrevImage);
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeModal();
+            } else if (e.key === 'ArrowRight') {
+                showNextImage();
+            } else if (e.key === 'ArrowLeft') {
+                showPrevImage();
+            }
+        });
+        
+        modalImage.addEventListener('click', (e) => e.stopPropagation());
+        modalPrev.addEventListener('click', (e) => e.stopPropagation());
+        modalNext.addEventListener('click', (e) => e.stopPropagation());
+        
+        // Smooth Scroll to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        if (backToTopButton) {
+            function toggleBackToTop() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            }
+            
+            window.addEventListener('scroll', toggleBackToTop);
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
+</body>
+</html>

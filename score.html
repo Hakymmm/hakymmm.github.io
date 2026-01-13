@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitiveness Score - A'Famosa water World E-Portfolio</title>
+    <link rel="icon" type="image/png" href="photos/wave.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #1a2332;
+            --secondary: #2a3441;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-blue: #06b6d4;
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --bg-card: rgba(42, 52, 65, 0.6);
+            --bg-card-hover: rgba(52, 62, 75, 0.8);
+            --border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        [data-theme="light"] {
+            --primary: #f8fafc;
+            --secondary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #1e293b;
+            --text-muted: #64748b;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-light), transparent);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card-hover);
+        }
+        
+        .section-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+        
+        .section-divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-blue));
+            margin: 1.5rem auto;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-blue));
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-light), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        table tbody tr {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        table tbody tr:hover {
+            transform: translateX(4px);
+            background-color: rgba(255, 255, 255, 0.12) !important;
+        }
+        
+        [data-theme="light"] .orb {
+            opacity: 0.1;
+        }
+        
+        [data-theme="light"] .nav-link {
+            color: var(--text-secondary);
+        }
+        
+        [data-theme="light"] .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+        
+        .dark-mode-text {
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] .dark-mode-text {
+            color: var(--text-secondary);
+        }
+        
+        .dark-mode-icon {
+            display: none;
+        }
+        
+        [data-theme="light"] .dark-mode-icon {
+            display: inline-block;
+        }
+        
+        [data-theme="light"] #moon-icon,
+        [data-theme="light"] #moon-icon-mobile {
+            display: none;
+        }
+        
+        [data-theme="light"] #sun-icon,
+        [data-theme="light"] #sun-icon-mobile {
+            display: inline-block;
+        }
+        
+        [data-theme="light"] .text-gray-300,
+        [data-theme="light"] .text-gray-400,
+        [data-theme="light"] .text-gray-500 {
+            color: #475569;
+        }
+        
+        [data-theme="light"] .text-gray-400 {
+            color: #334155;
+        }
+        
+        [data-theme="light"] .text-gray-500 {
+            color: #1e293b;
+        }
+        
+        [data-theme="light"] .gradient-text {
+            background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        #back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+        }
+        
+        #back-to-top:active {
+            transform: translateY(-2px) scale(1.05);
+            transition: all 0.1s;
+        }
+        
+        #back-to-top i {
+            transition: transform 0.3s ease;
+        }
+        
+        #back-to-top:hover i {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Image optimization */
+        img {
+            image-rendering: -webkit-optimize-contrast;
+        }
+        
+        img[loading="lazy"] {
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.1) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        [data-theme="light"] .avg-column {
+            background-color: rgba(59, 130, 246, 0.25) !important;
+        }
+        
+        [data-theme="light"] .bg-blue-500\/20 {
+            background-color: rgba(59, 130, 246, 0.35) !important;
+        }
+        
+        [data-theme="light"] .bg-cyan-500\/20 {
+            background-color: rgba(6, 182, 212, 0.35) !important;
+        }
+        
+        [data-theme="light"] .bg-blue-400\/20 {
+            background-color: rgba(96, 165, 250, 0.35) !important;
+        }
+        
+        [data-theme="light"] .text-blue-300 {
+            color: #1e40af !important;
+            font-weight: 600;
+        }
+        
+        [data-theme="light"] .text-cyan-300 {
+            color: #0e7490 !important;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    
+    <div class="content-wrapper">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full glass-card z-50">
+            <div class="container mx-auto px-4 md:px-6 py-3 md:py-4">
+                <div class="flex items-center justify-between">
+                    <a href="index.html" class="text-base md:text-lg font-semibold tracking-tight">GROUP 4</a>
+                    <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                        <a href="index.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Home</a>
+                        <a href="group.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Group</a>
+                        <a href="overview.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Overview</a>
+                        <a href="visit.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Visit</a>
+                        <a href="media.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Media</a>
+                        <a href="score.html" class="nav-link text-white dark-mode-text">Score</a>
+                        <a href="analysis.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Analysis</a>
+                        <a href="recommendations.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Recommendations</a>
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                            <i class="fas fa-sun text-xl text-yellow-400 hidden dark-mode-icon" id="sun-icon"></i>
+                            <i class="fas fa-moon text-xl text-blue-300" id="moon-icon"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-4 md:hidden">
+                        <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                            <i class="fas fa-sun text-lg text-yellow-400 hidden dark-mode-icon" id="sun-icon-mobile"></i>
+                            <i class="fas fa-moon text-lg text-blue-300" id="moon-icon-mobile"></i>
+                        </button>
+                        <button class="text-white dark-mode-text" id="mobile-menu-btn">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:hidden mt-4 pb-4" id="mobile-menu">
+                    <div class="flex flex-col space-y-3 text-sm">
+                        <a href="index.html" class="text-gray-300 hover:text-white transition-colors py-2">Home</a>
+                        <a href="group.html" class="text-gray-300 hover:text-white transition-colors py-2">Group</a>
+                        <a href="overview.html" class="text-gray-300 hover:text-white transition-colors py-2">Overview</a>
+                        <a href="visit.html" class="text-gray-300 hover:text-white transition-colors py-2">Visit</a>
+                        <a href="media.html" class="text-gray-300 hover:text-white transition-colors py-2">Media</a>
+                        <a href="score.html" class="text-white transition-colors py-2">Score</a>
+                        <a href="analysis.html" class="text-gray-300 hover:text-white transition-colors py-2">Analysis</a>
+                        <a href="recommendations.html" class="text-gray-300 hover:text-white transition-colors py-2">Recommendations</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Competitiveness Score Section -->
+        <section class="px-4 md:px-6 pt-24">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">05</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Competitiveness Score</h2>
+                <div class="section-divider"></div>
+                
+                <!-- Individual Member Scores Table -->
+                <div class="glass-card border border-white/20 rounded-xl overflow-hidden mb-8">
+                    <div class="p-4 md:p-8 border-b border-white/20">
+                        <h3 class="text-xl font-medium">Individual Member Scores</h3>
+                        <p class="text-sm text-gray-400 mt-2">Scores from all 6 team members (0-3 scale)</p>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                        <table class="w-full table-auto" id="memberScoresTable">
+                            <thead>
+                                <tr class="border-b border-white/20">
+                                    <th class="px-3 md:px-4 py-3 md:py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Indicator</th>
+                                    <th class="px-2 md:px-3 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Zuhairah</th>
+                                    <th class="px-2 md:px-3 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Saidatul</th>
+                                    <th class="px-2 md:px-3 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Syakirah</th>
+                                    <th class="px-2 md:px-3 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Alya</th>
+                                    <th class="px-2 md:px-3 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Luqman</th>
+                                    <th class="px-2 md:px-3 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Aqil</th>
+                                    <th class="px-3 md:px-4 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider bg-blue-500/10 avg-column">Average</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/10">
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Accessibility">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Accessibility</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">2</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Visitor numbers">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Visitor numbers</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">2</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Revenue">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Revenue</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">3</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Infrastructure and facilities">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Infrastructure and facilities</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">3</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Marketing and promotion">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Marketing and promotion</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">1</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">2</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Online reviews">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Online reviews</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">2</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Environmental sustainability">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Environmental sustainability</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">2</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Cultural authenticity">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Cultural authenticity</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">1</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">1</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">1</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">1</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">1</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">1</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Local support">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Local support</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">2</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Innovation">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Innovation</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">3</td>
+                                    <td class="px-2 md:px-3 py-3 md:py-4 text-center text-xs md:text-sm">2</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 avg-column"><span class="avg-score font-medium">2</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glass-card border border-white/20 rounded-xl overflow-hidden mb-8">
+                    <div class="p-4 md:p-8 border-b border-white/20">
+                        <h3 class="text-xl font-medium">Competitiveness Indicators</h3>
+                        <p class="text-sm text-gray-400 mt-2">Assessment across 10 key indicators (Total Score: 30)</p>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                        <table class="w-full table-auto">
+                            <thead>
+                                <tr class="border-b border-white/20">
+                                    <th class="px-3 md:px-4 py-3 md:py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Indicator</th>
+                                    <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Scale Description</th>
+                                    <th class="px-3 md:px-4 py-3 md:py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider bg-blue-500/10">Score (0-3)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/10">
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Accessibility">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Accessibility</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Factors such as proximity to transportation hubs, availability of parking, and ease of navigation.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">2</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Visitor numbers">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Visitor numbers</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Suitable during specific season, secure the targeted demographic and geographic origin.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">2</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Revenue">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Revenue</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Variety of revenue generated from entrance fees, merchandise sales, and other tourism-related activities.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">3</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Infrastructure and facilities">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Infrastructure and facilities</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Factors such as the condition of roads and sidewalks, availability of public amenities, and the quality of visitor facilities such as restrooms and food service.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">3</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Marketing and promotion">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Marketing and promotion</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Factors such as social media engagement, advertising reach, and public relations efforts.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">2</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Online reviews">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Online reviews</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Positive reviews and high ratings are indicative of a popular and competitive attraction in online platforms such as TripAdvisor.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">2</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Environmental sustainability">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Environmental sustainability</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Committed to environmental sustainability, through initiatives such as waste reduction, renewable energy, and responsible tourism practices, can have a competitive advantage.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">2</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Cultural authenticity">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Cultural authenticity</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Offer a genuine cultural experience, including local cuisine, customs, and traditions.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">1</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Local support">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Local support</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Factors such as the availability of skilled labour, the level of government support, and the engagement of local businesses.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">2</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors" data-indicator="Innovation">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-medium">Innovation</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-300">Factors such as the development of new attractions or experiences, the use of technology to enhance the visitor experience, and the ability to respond to emerging market trends.</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-xs md:text-sm bg-blue-500/10 main-avg-score">2</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="border-t-2 border-white/30 bg-blue-500/10">
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-sm md:text-base font-bold" colspan="2">Total Score (out of 30)</td>
+                                    <td class="px-3 md:px-4 py-3 md:py-4 text-center text-sm md:text-base font-bold text-blue-300">21</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/20 py-8 md:py-10 px-4 md:px-6 mt-16 md:mt-20">
+            <div class="container mx-auto text-center">
+                <p class="text-sm text-gray-400 mb-2">HTT167 e-portfolio</p>
+                <p class="text-xs text-gray-500">Tourism Competitiveness Analysis Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', currentTheme);
+        
+        function toggleTheme() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        if (themeToggleMobile) {
+            themeToggleMobile.addEventListener('click', toggleTheme);
+        }
+        
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

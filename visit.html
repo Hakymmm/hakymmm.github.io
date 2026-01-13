@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit - A'Famosa water World E-Portfolio</title>
+    <link rel="icon" type="image/png" href="photos/wave.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #1a2332;
+            --secondary: #2a3441;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-blue: #06b6d4;
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --bg-card: rgba(42, 52, 65, 0.6);
+            --bg-card-hover: rgba(52, 62, 75, 0.8);
+            --border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        [data-theme="light"] {
+            --primary: #f8fafc;
+            --secondary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #1e293b;
+            --text-muted: #64748b;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-light), transparent);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card-hover);
+        }
+        
+        .section-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+        
+        .section-divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-blue));
+            margin: 1.5rem auto;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-blue));
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        [data-theme="light"] .orb {
+            opacity: 0.1;
+        }
+        
+        [data-theme="light"] .nav-link {
+            color: var(--text-secondary);
+        }
+        
+        [data-theme="light"] .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .dark-mode-text {
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] .dark-mode-text {
+            color: var(--text-secondary);
+        }
+        
+        .dark-mode-icon {
+            display: none;
+        }
+        
+        [data-theme="light"] .dark-mode-icon {
+            display: inline-block;
+        }
+        
+        [data-theme="light"] #moon-icon,
+        [data-theme="light"] #moon-icon-mobile {
+            display: none;
+        }
+        
+        [data-theme="light"] #sun-icon,
+        [data-theme="light"] #sun-icon-mobile {
+            display: inline-block;
+        }
+        
+        [data-theme="light"] .text-gray-300,
+        [data-theme="light"] .text-gray-400,
+        [data-theme="light"] .text-gray-500 {
+            color: #475569;
+        }
+        
+        [data-theme="light"] .text-gray-400 {
+            color: #334155;
+        }
+        
+        [data-theme="light"] .text-gray-500 {
+            color: #1e293b;
+        }
+        
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        #back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+        }
+        
+        #back-to-top:active {
+            transform: translateY(-2px) scale(1.05);
+            transition: all 0.1s;
+        }
+        
+        #back-to-top i {
+            transition: transform 0.3s ease;
+        }
+        
+        #back-to-top:hover i {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Image optimization */
+        img {
+            image-rendering: -webkit-optimize-contrast;
+        }
+        
+        img[loading="lazy"] {
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.1) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    
+    <div class="content-wrapper">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full glass-card z-50">
+            <div class="container mx-auto px-4 md:px-6 py-3 md:py-4">
+                <div class="flex items-center justify-between">
+                    <a href="index.html" class="text-base md:text-lg font-semibold tracking-tight">GROUP 4</a>
+                    <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                        <a href="index.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Home</a>
+                        <a href="group.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Group</a>
+                        <a href="overview.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Overview</a>
+                        <a href="visit.html" class="nav-link text-white dark-mode-text">Visit</a>
+                        <a href="media.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Media</a>
+                        <a href="score.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Score</a>
+                        <a href="analysis.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Analysis</a>
+                        <a href="recommendations.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Recommendations</a>
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                            <i class="fas fa-sun text-xl text-yellow-400 hidden dark-mode-icon" id="sun-icon"></i>
+                            <i class="fas fa-moon text-xl text-blue-300" id="moon-icon"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-4 md:hidden">
+                        <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                            <i class="fas fa-sun text-lg text-yellow-400 hidden dark-mode-icon" id="sun-icon-mobile"></i>
+                            <i class="fas fa-moon text-lg text-blue-300" id="moon-icon-mobile"></i>
+                        </button>
+                        <button class="text-white dark-mode-text" id="mobile-menu-btn">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:hidden mt-4 pb-4" id="mobile-menu">
+                    <div class="flex flex-col space-y-3 text-sm">
+                        <a href="index.html" class="text-gray-300 hover:text-white transition-colors py-2">Home</a>
+                        <a href="group.html" class="text-gray-300 hover:text-white transition-colors py-2">Group</a>
+                        <a href="overview.html" class="text-gray-300 hover:text-white transition-colors py-2">Overview</a>
+                        <a href="visit.html" class="text-white transition-colors py-2">Visit</a>
+                        <a href="media.html" class="text-gray-300 hover:text-white transition-colors py-2">Media</a>
+                        <a href="score.html" class="text-gray-300 hover:text-white transition-colors py-2">Score</a>
+                        <a href="analysis.html" class="text-gray-300 hover:text-white transition-colors py-2">Analysis</a>
+                        <a href="recommendations.html" class="text-gray-300 hover:text-white transition-colors py-2">Recommendations</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Site Visit Plan Section -->
+        <section class="px-4 md:px-6 pt-24">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">03</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Visit</h2>
+                <div class="section-divider"></div>
+                
+                <!-- Visit Information Section -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
+                    <!-- Purpose -->
+                    <div class="glass-card rounded-xl p-6 md:p-8 border border-white/20">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-bullseye text-2xl text-blue-300"></i>
+                        </div>
+                        <h3 class="text-xl font-medium mb-4">Purpose</h3>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            To conduct a comprehensive on-site evaluation of A'Famosa Water World's tourism competitiveness 
+                            through direct observation, data collection, and visitor interaction. This visit aims to assess 
+                            the attraction's performance across key competitiveness indicators including facilities, services, 
+                            accessibility, and overall visitor experience.
+                        </p>
+                    </div>
+
+                    <!-- Date/Time/Duration -->
+                    <div class="glass-card rounded-xl p-6 md:p-8 border border-white/20">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-calendar-alt text-2xl text-blue-300"></i>
+                        </div>
+                        <h3 class="text-xl font-medium mb-4">Date, Time & Duration</h3>
+                        <div class="space-y-3 text-sm text-gray-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar text-cyan-400 mr-3 w-5"></i>
+                                <span><strong>Date:</strong> 15th September 2025</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-cyan-400 mr-3 w-5"></i>
+                                <span><strong>Time:</strong> 10:00 AM - 7:00 PM</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-hourglass-half text-cyan-400 mr-3 w-5"></i>
+                                <span><strong>Duration:</strong> 9 hours</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transportation -->
+                    <div class="glass-card rounded-xl p-6 md:p-8 border border-white/20">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-shuttle-van text-2xl text-blue-300"></i>
+                        </div>
+                        <h3 class="text-xl font-medium mb-4">Transportation</h3>
+                        <div class="space-y-3 text-sm text-gray-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-shuttle-van text-cyan-400 mr-3 w-5"></i>
+                                <span><strong>Mode:</strong> Shuttle (Car)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-route text-cyan-400 mr-3 w-5"></i>
+                                <span><strong>Distance:</strong> 30 km</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-stopwatch text-cyan-400 mr-3 w-5"></i>
+                                <span><strong>Travel Time:</strong> 40 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schedule of Activities -->
+                <div class="glass-card rounded-xl p-6 md:p-8 border border-white/20 mb-12">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-list-alt text-2xl text-blue-300"></i>
+                        </div>
+                        <h3 class="text-2xl font-medium">Schedule of Activities</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <span class="text-blue-300 font-semibold text-sm">10:00</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Arrival & Registration</h4>
+                                    <p class="text-sm text-gray-400">Arrive at A'Famosa Water World, complete registration and entry procedures</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <span class="text-blue-300 font-semibold text-sm">10:30</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Initial Facility Tour</h4>
+                                    <p class="text-sm text-gray-400">Explore main facilities, observe layout and accessibility features</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <span class="text-blue-300 font-semibold text-sm">11:30</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Photo & Video Documentation</h4>
+                                    <p class="text-sm text-gray-400">Systematic documentation of facilities, attractions, and visitor areas</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <span class="text-blue-300 font-semibold text-sm">12:30</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Lunch Break</h4>
+                                    <p class="text-sm text-gray-400">Break for lunch and initial data review</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <span class="text-cyan-300 font-semibold text-sm">14:00</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Visitor Interaction</h4>
+                                    <p class="text-sm text-gray-400">Conduct informal interviews and gather feedback from visitors</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <span class="text-cyan-300 font-semibold text-sm">15:30</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Detailed Observations</h4>
+                                    <p class="text-sm text-gray-400">In-depth observation of services, amenities, and operational aspects</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <span class="text-cyan-300 font-semibold text-sm">17:00</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Data Collection Review</h4>
+                                    <p class="text-sm text-gray-400">Review collected data, verify completeness, and note key findings</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <span class="text-cyan-300 font-semibold text-sm">19:00</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Departure</h4>
+                                    <p class="text-sm text-gray-400">Conclude visit and depart from the location</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expected Outcome -->
+                <div class="glass-card rounded-xl p-6 md:p-8 border border-white/20 mb-12">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-target text-2xl text-blue-300"></i>
+                        </div>
+                        <h3 class="text-2xl font-medium">Expected Outcome</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium mb-3 text-cyan-400">Data Collection</h4>
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-cyan-400 mr-3 mt-1"></i>
+                                    <span>Comprehensive visual documentation (photos and videos)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-cyan-400 mr-3 mt-1"></i>
+                                    <span>Detailed observation notes on all 7 competitiveness indicators</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-cyan-400 mr-3 mt-1"></i>
+                                    <span>Visitor feedback and testimonials</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-3 text-cyan-400">Analysis Foundation</h4>
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-cyan-400 mr-3 mt-1"></i>
+                                    <span>Primary data for competitiveness scoring</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-cyan-400 mr-3 mt-1"></i>
+                                    <span>Insights for analysis and recommendations</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-cyan-400 mr-3 mt-1"></i>
+                                    <span>Evidence-based evaluation of the attraction's strengths and weaknesses</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Existing Cards -->
+                <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
+                        <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Group Preparation</h3>
+                        <ul class="space-y-3 text-xs md:text-sm text-gray-300">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-blue-400 mt-1">•</span>
+                                <span>Research on waterpark facilities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-blue-400 mt-1">•</span>
+                                <span>Review competitiveness indicators</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-blue-400 mt-1">•</span>
+                                <span>Prepare observation checklist</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-blue-400 mt-1">•</span>
+                                <span>Coordinate visit schedule</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-blue-400 mt-1">•</span>
+                                <span>Assign roles and responsibilities</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
+                        <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Group Strategies</h3>
+                        <ul class="space-y-3 text-xs md:text-sm text-gray-300">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Divide into observation teams</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Systematic data collection approach</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Photo and video documentation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Visitor interaction for feedback</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Real-time note-taking</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
+                        <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Overall Experience</h3>
+                        <p class="text-xs md:text-sm text-gray-300 leading-relaxed mb-4">
+                            Our site visit to A'Famosa water World provided valuable insights into 
+                            the operational aspects, visitor experience, and overall competitiveness of 
+                            the attraction. We observed various facilities, services, and management 
+                            practices that contribute to the park's appeal and areas for potential improvement.
+                        </p>
+                        <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
+                            The visit enabled us to gather first-hand data and observations that form the 
+                            basis of our competitiveness analysis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/20 py-8 md:py-10 px-4 md:px-6 mt-16 md:mt-20">
+            <div class="container mx-auto text-center">
+                <p class="text-sm text-gray-400 mb-2">HTT167 e-portfolio</p>
+                <p class="text-xs text-gray-500">Tourism Competitiveness Analysis Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', currentTheme);
+        
+        function toggleTheme() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        if (themeToggleMobile) {
+            themeToggleMobile.addEventListener('click', toggleTheme);
+        }
+        
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth Scroll to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        if (backToTopButton) {
+            function toggleBackToTop() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            }
+            
+            window.addEventListener('scroll', toggleBackToTop);
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</body>
+</html>

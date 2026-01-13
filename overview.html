@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attraction Overview - A'Famosa water World E-Portfolio</title>
+    <link rel="icon" type="image/png" href="photos/wave.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #1a2332;
+            --secondary: #2a3441;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-blue: #06b6d4;
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --bg-card: rgba(42, 52, 65, 0.6);
+            --bg-card-hover: rgba(52, 62, 75, 0.8);
+            --border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        [data-theme="light"] {
+            --primary: #f8fafc;
+            --secondary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #1e293b;
+            --text-muted: #64748b;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-light), transparent);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card-hover);
+        }
+        
+        .section-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+        
+        .section-divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-blue));
+            margin: 1.5rem auto;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-blue));
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        [data-theme="light"] .orb {
+            opacity: 0.1;
+        }
+        
+        [data-theme="light"] .nav-link {
+            color: var(--text-secondary);
+        }
+        
+        [data-theme="light"] .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .dark-mode-text {
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] .dark-mode-text {
+            color: var(--text-secondary);
+        }
+        
+        .dark-mode-icon {
+            display: none;
+        }
+        
+        [data-theme="light"] .dark-mode-icon {
+            display: inline-block;
+        }
+        
+        [data-theme="light"] #moon-icon,
+        [data-theme="light"] #moon-icon-mobile {
+            display: none;
+        }
+        
+        [data-theme="light"] #sun-icon,
+        [data-theme="light"] #sun-icon-mobile {
+            display: inline-block;
+        }
+        
+        [data-theme="light"] .text-gray-300,
+        [data-theme="light"] .text-gray-400,
+        [data-theme="light"] .text-gray-500 {
+            color: #475569;
+        }
+        
+        [data-theme="light"] .text-gray-400 {
+            color: #334155;
+        }
+        
+        [data-theme="light"] .text-gray-500 {
+            color: #1e293b;
+        }
+        
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        #back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+        }
+        
+        #back-to-top:active {
+            transform: translateY(-2px) scale(1.05);
+            transition: all 0.1s;
+        }
+        
+        #back-to-top i {
+            transition: transform 0.3s ease;
+        }
+        
+        #back-to-top:hover i {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Image optimization */
+        img {
+            image-rendering: -webkit-optimize-contrast;
+        }
+        
+        img[loading="lazy"] {
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.1) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    
+    <div class="content-wrapper">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full glass-card z-50">
+            <div class="container mx-auto px-4 md:px-6 py-3 md:py-4">
+                <div class="flex items-center justify-between">
+                    <a href="index.html" class="text-base md:text-lg font-semibold tracking-tight">GROUP 4</a>
+                    <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                        <a href="index.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Home</a>
+                        <a href="group.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Group</a>
+                        <a href="overview.html" class="nav-link text-white dark-mode-text">Overview</a>
+                        <a href="visit.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Visit</a>
+                        <a href="media.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Media</a>
+                        <a href="score.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Score</a>
+                        <a href="analysis.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Analysis</a>
+                        <a href="recommendations.html" class="nav-link text-gray-300 hover:text-white dark-mode-text">Recommendations</a>
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                            <i class="fas fa-sun text-xl text-yellow-400 hidden dark-mode-icon" id="sun-icon"></i>
+                            <i class="fas fa-moon text-xl text-blue-300" id="moon-icon"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-4 md:hidden">
+                        <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                            <i class="fas fa-sun text-lg text-yellow-400 hidden dark-mode-icon" id="sun-icon-mobile"></i>
+                            <i class="fas fa-moon text-lg text-blue-300" id="moon-icon-mobile"></i>
+                        </button>
+                        <button class="text-white dark-mode-text" id="mobile-menu-btn">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:hidden mt-4 pb-4" id="mobile-menu">
+                    <div class="flex flex-col space-y-3 text-sm">
+                        <a href="index.html" class="text-gray-300 hover:text-white transition-colors py-2">Home</a>
+                        <a href="group.html" class="text-gray-300 hover:text-white transition-colors py-2">Group</a>
+                        <a href="overview.html" class="text-white transition-colors py-2">Overview</a>
+                        <a href="visit.html" class="text-gray-300 hover:text-white transition-colors py-2">Visit</a>
+                        <a href="media.html" class="text-gray-300 hover:text-white transition-colors py-2">Media</a>
+                        <a href="score.html" class="text-gray-300 hover:text-white transition-colors py-2">Score</a>
+                        <a href="analysis.html" class="text-gray-300 hover:text-white transition-colors py-2">Analysis</a>
+                        <a href="recommendations.html" class="text-gray-300 hover:text-white transition-colors py-2">Recommendations</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Overview Section -->
+        <section class="px-4 md:px-6 pt-24">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">02</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Attraction Overview</h2>
+                <div class="section-divider"></div>
+                
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
+                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
+                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Location</h3>
+                        <p class="text-gray-400 leading-relaxed text-xs md:text-sm mb-4">
+                            A'Famosa water World is located in the historic city of Melaka, Malaysia. 
+                            Situated in a prime location accessible from major highways, the waterpark offers 
+                            easy access for both local and international visitors. The strategic location 
+                            combines the charm of historical Melaka with modern entertainment facilities.
+                        </p>
+                        <a href="https://www.melakawonderland.com.my/bm/" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center text-xs text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Visit Official Website
+                        </a>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
+                        <h3 class="text-lg md:text-xl font-medium mb-3 md:mb-4">History</h3>
+                        <p class="text-gray-400 leading-relaxed text-xs md:text-sm">
+                            Established as one of Melaka's premier family entertainment destinations, 
+                            A'Famosa water World has been serving visitors for several years. The park 
+                            was developed to complement Melaka's growing tourism industry, providing 
+                            a modern recreational facility that appeals to families and adventure seekers 
+                            visiting the UNESCO World Heritage city.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Embedded Map -->
+                <div class="glass-card rounded-xl p-0 border border-white/20 overflow-hidden mb-8 md:mb-12">
+                    <div class="h-64 md:h-96 w-full map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.239498391521!2d102.2127142!3d2.4269654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31ce0236fe1b1d4d%3A0xf8491004587e0128!2sA%27Famosa%20Water%20Theme%20Park%20(Water%20World)!5e0!3m2!1sen!2smy!4v1763707051263!5m2!1sen!2smy" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="p-4 md:p-6 border-t border-white/20">
+                        <h3 class="text-lg md:text-xl font-medium mb-2">Location Map</h3>
+                        <p class="text-xs md:text-sm text-gray-400">A'Famosa Water Theme Park (Water World), Melaka, Malaysia</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
+                    <h3 class="text-lg md:text-xl font-medium mb-6 md:mb-8 text-center">Key Features</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/20">
+                            <p class="text-sm font-medium mb-2">Water Slides</p>
+                            <p class="text-xs text-gray-400">Thrilling water slides for all ages</p>
+                        </div>
+                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/20">
+                            <p class="text-sm font-medium mb-2">Wave Pool</p>
+                            <p class="text-xs text-gray-400">Experience artificial waves</p>
+                        </div>
+                        <div class="text-center py-6 border-b md:border-b-0 border-white/20">
+                            <p class="text-sm font-medium mb-2">Kid Area</p>
+                            <p class="text-xs text-gray-400">Safe play area for children</p>
+                        </div>
+                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/20">
+                            <p class="text-sm font-medium mb-2">Food Stall</p>
+                            <p class="text-xs text-gray-400">Food and beverage options</p>
+                        </div>
+                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/20">
+                            <p class="text-sm font-medium mb-2">Seating Area</p>
+                            <p class="text-xs text-gray-400">Outdoor seating for visitors to sit and eat</p>
+                        </div>
+                        <div class="text-center py-6 md:border-r-0 border-white/20">
+                            <p class="text-sm font-medium mb-2">Souvenir Store</p>
+                            <p class="text-xs text-gray-400">Gift shop with merchandise and souvenirs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/20 py-8 md:py-10 px-4 md:px-6 mt-16 md:mt-20">
+            <div class="container mx-auto text-center">
+                <p class="text-sm text-gray-400 mb-2">HTT167 e-portfolio</p>
+                <p class="text-xs text-gray-500">Tourism Competitiveness Analysis Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', currentTheme);
+        
+        function toggleTheme() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        if (themeToggleMobile) {
+            themeToggleMobile.addEventListener('click', toggleTheme);
+        }
+        
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth Scroll to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        if (backToTopButton) {
+            function toggleBackToTop() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            }
+            
+            window.addEventListener('scroll', toggleBackToTop);
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</body>
+</html>
